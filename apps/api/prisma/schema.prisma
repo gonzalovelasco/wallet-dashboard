@@ -1,17 +1,40 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [citext]
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id               String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email            String          @unique @db.Citext
+  name             String?
+  favoritesWallets UserFavorites[]
+}
+
+model UserFavorites {
+  id       Int    @id @default(autoincrement())
+  userId   String @db.Uuid
+  User     User   @relation(fields: [userId], references: [id])
+  walletId Int
+  Wallet   Wallet @relation(fields: [walletId], references: [id])
+}
+
+model Wallet {
+  id               Int             @id @default(autoincrement())
+  address          String          @unique @db.Citext
+  createdAt        DateTime        @default(now())
+  firstTransaction DateTime
+  users            UserFavorites[]
+}
+
+model ExchangeRate {
+  id        Int      @id @default(autoincrement())
+  currency  String
+  rate      Float
+  createdAt DateTime @default(now())
 }
