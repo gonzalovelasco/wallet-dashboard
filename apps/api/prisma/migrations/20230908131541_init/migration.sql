@@ -24,7 +24,7 @@ CREATE TABLE "Wallet" (
     "id" SERIAL NOT NULL,
     "address" CITEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "firstTransaction" TIMESTAMP(3) NOT NULL,
+    "firstTransaction" TIMESTAMP(3),
 
     CONSTRAINT "Wallet_pkey" PRIMARY KEY ("id")
 );

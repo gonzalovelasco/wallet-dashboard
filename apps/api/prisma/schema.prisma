@@ -28,7 +28,7 @@ model Wallet {
   id               Int             @id @default(autoincrement())
   address          String          @unique @db.Citext
   createdAt        DateTime        @default(now())
-  firstTransaction DateTime
+  firstTransaction DateTime?
   users            UserFavorites[]
 }
 
