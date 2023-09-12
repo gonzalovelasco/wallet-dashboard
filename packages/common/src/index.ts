@@ -16,7 +16,7 @@ export type WalletDto = {
   firstTransaction: Date | null;
 };
 
-export type ExchangeRate = {
+export type ExchangeRateDto = {
   id: number;
   currency: string;
   toCurrency: string;
