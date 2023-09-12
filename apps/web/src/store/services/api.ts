@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { type UserDto, type WalletDto } from "common";
 
 export const api = createApi({
   reducerPath: "baseApi",
@@ -7,6 +8,28 @@ export const api = createApi({
   }),
   tagTypes: [],
   endpoints: (builder) => ({
+    getUser: builder.query<UserDto, void>({
+      query: () => ({
+        url: "/user",
+      }),
+    }),
+    addWalletAddress: builder.mutation<void, { address: string }>({
+      query: (body) => ({
+        url: "/wallet",
+        method: "POST",
+        body,
+      }),
+    }),
+    getWalletAddress: builder.query<string, { address: string }>({
+      query: (address) => ({
+        url: `/wallet/${address}`,
+      }),
+    }),
+    getWalletAddresses: builder.query<WalletDto[], void>({
+      query: () => ({
+        url: "/wallet",
+      }),
+    }),
     ServerStatus: builder.query<{ message: string }, void>({
       query: () => ({
         url: "/",
@@ -15,4 +38,10 @@ export const api = createApi({
   }),
 });
 
-export const { useServerStatusQuery } = api;
+export const {
+  useGetUserQuery,
+  useAddWalletAddressMutation,
+  useGetWalletAddressQuery,
+  useGetWalletAddressesQuery,
+  useServerStatusQuery,
+} = api;
