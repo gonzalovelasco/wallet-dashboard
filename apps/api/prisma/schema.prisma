@@ -19,8 +19,8 @@ model User {
 model UserFavorites {
   id       Int    @id @default(autoincrement())
   userId   String @db.Uuid
-  User     User   @relation(fields: [userId], references: [id])
   walletId Int
+  User     User   @relation(fields: [userId], references: [id])
   Wallet   Wallet @relation(fields: [walletId], references: [id])
 }
 
@@ -33,8 +33,9 @@ model Wallet {
 }
 
 model ExchangeRate {
-  id        Int      @id @default(autoincrement())
-  currency  String
-  rate      Float
-  createdAt DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  currency    String
+  rate        Float
+  lastUpdated DateTime @default(now())
+  toCurrency  String
 }
