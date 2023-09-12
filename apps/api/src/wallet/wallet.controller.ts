@@ -1,4 +1,13 @@
-import { Controller, Get, Param, Post, Body } from "@nestjs/common";
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Body,
+  HttpException,
+  HttpStatus,
+} from "@nestjs/common";
+import { isAddress } from "web3-validator";
 import { WalletService } from "./wallet.service";
 import { type WalletDto } from "common";
 
@@ -8,6 +17,9 @@ export class WalletController {
 
   @Post()
   async addWallet(@Body() walletDto: WalletDto) {
+    if (!isAddress(walletDto.address)) {
+      throw new HttpException("Invalid address", HttpStatus.BAD_REQUEST);
+    }
     await this.walletService.addWalletAddress(walletDto.address);
     return "Wallet address added successfully";
   }
