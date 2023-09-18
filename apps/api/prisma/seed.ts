@@ -10,6 +10,33 @@ async function main() {
       name: "test",
     },
   });
+
+  await prisma.exchangeRate.upsert({
+    where: {
+      currency_toCurrency: { currency: "Euro", toCurrency: "ETH" },
+    },
+    create: {
+      currency: "Euro",
+      toCurrency: "ETH",
+      rate: 0.045,
+    },
+    update: {},
+  });
+
+  await prisma.exchangeRate.upsert({
+    where: {
+      currency_toCurrency: {
+        currency: "US Dollar",
+        toCurrency: "ETH",
+      },
+    },
+    create: {
+      currency: "US Dollar",
+      toCurrency: "ETH",
+      rate: 0.035,
+    },
+    update: {},
+  });
 }
 
 main()

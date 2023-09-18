@@ -35,7 +35,8 @@ model Wallet {
 model ExchangeRate {
   id          Int      @id @default(autoincrement())
   currency    String
+  toCurrency  String
   rate        Float
   lastUpdated DateTime @default(now())
-  toCurrency  String
+  @@unique([currency, toCurrency])
 }
