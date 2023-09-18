@@ -15,13 +15,27 @@ import { type WalletDto } from "common";
 export class WalletController {
   constructor(private readonly walletService: WalletService) {}
 
+  convertUnixTimestampToDateTime(unixTimestamp: number): Date {
+    const milliseconds = unixTimestamp * 1000; // Convert to milliseconds
+    return new Date(milliseconds);
+  }
+
   @Post()
   async addWallet(@Body() walletDto: WalletDto) {
     if (!isAddress(walletDto.address)) {
       throw new HttpException("Invalid address", HttpStatus.BAD_REQUEST);
     }
-    await this.walletService.addWalletAddress(walletDto.address);
-    return "Wallet address added successfully";
+    const response = await this.walletService.getWalletInfo(walletDto.address);
+    if (response && response.result.length > 0) {
+      console.log(
+        this.convertUnixTimestampToDateTime(response.result[0].timeStamp)
+      );
+      walletDto.firstTransaction = this.convertUnixTimestampToDateTime(
+        response.result[0].timeStamp
+      );
+    }
+    await this.walletService.addWalletAddress(walletDto);
+    return;
   }
 
   @Get()
