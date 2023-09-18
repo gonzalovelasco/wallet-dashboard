@@ -1,81 +1,46 @@
-# Turborepo starter
+# Wallet Dashboard
 
-This is an official starter Turborepo.
+## Description
 
-## Using this example
+Wallet Dashboard is a generic platform that provides analytics and information on Ethereum wallets. It allows users to perform various wallet-related operations, including adding wallets, organizing them by favorites, checking if a wallet is old, and integrating with Etherscan to fetch wallet information.
 
-Run the following command:
+## Actual functionality
 
-```sh
-npx create-turbo@latest
-```
+- Add wallet addresses.
+- Organize wallets by marking them as favorites.
+- Determine if a wallet is considered old based on specific criteria.
+- Integration with Etherscan to retrieve wallet information.
 
-## What's inside?
+## Technologies Used
 
-This Turborepo includes the following packages/apps:
+- TypeScript
+- TurboRepo
+- NestJS
+- PostgreSQL
+- Prisma
+- React
+- Next.js
+- Tailwind CSS
+- React-Redux
+- RESTful API for endpoints
+- Docker
 
-### Apps and Packages
+## Getting Started
 
-- `api`: a [Nest.js](https://nestjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+1. Clone the repository to your local machine.
+2. Install the required dependencies using `npm`.
+3. Configure your environment variables, including database settings and API keys.
+4. Start PostgreSQL Container `npm run db:up`
+5. Initialize Prisma Database in apps/api
+   1. `npx prisma migrate dev`
+   2. `npx prisma db:seed`
+6. Run the application locally using `npm run dev`.
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+## Future Improvements
 
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+- Select a wallet and view its balance in Euro/US Dollar.
+- Change the rate Euro/US Dollar/ETH
+- Secure endpoints with JWT authentication.
+- Generate comprehensive API documentation.
+- Implement tests for both the backend and frontend.
+- Set up GitHub workflows for automated CI/CD.
